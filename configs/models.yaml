@@ -1,0 +1,44 @@
+# The five architectures evaluated in the paper (Sec. 2.4.1, Table 6).
+# `timm_name` is the pytorch-image-models identifier used to build the network
+# with ImageNet weights; the classification head is replaced by a new linear
+# layer with one output per retained health class (Sec. 3.1.2).
+#
+# input_size: [PAPER] Sec. 3.1.3 gives 224 x 224 for VGG-16, ResNet-18 and ViT,
+# and 384 x 384 for Swin Transformer. The paper does not state ConvNeXt's input
+# size; 224 x 224 (its ImageNet default) is an [ASSUMPTION].
+
+vgg16:
+  display_name: VGG-16
+  family: cnn
+  timm_name: vgg16
+  input_size: 224
+
+resnet18:
+  display_name: ResNet 18
+  family: cnn
+  timm_name: resnet18
+  input_size: 224
+
+vit_b:
+  display_name: VIT-B
+  family: transformer
+  # ViT-Base: 12 layers, hidden size 768, 16 x 16 patches (Sec. 2.4.1)
+  timm_name: vit_base_patch16_224
+  input_size: 224
+
+swin_b:
+  display_name: Swin Transformer-B
+  family: transformer
+  # Paper (Sec. 2.4.1): Swin-B with 4 x 4 patches and 7 x 7 windows; Sec. 3.1.3: 384 x 384 input.
+  # The ImageNet Swin-B checkpoint for 384 x 384 inputs uses 12 x 12 windows
+  # (swin_base_patch4_window12_384); the 7 x 7-window checkpoint is trained at 224 x 224
+  # (swin_base_patch4_window7_224). [ASSUMPTION] The 384 checkpoint is the default here.
+  # To use 7 x 7 windows instead, set timm_name: swin_base_patch4_window7_224 and input_size: 224.
+  timm_name: swin_base_patch4_window12_384
+  input_size: 384
+
+convnext_b:
+  display_name: ConvNeXt-B
+  family: cnn
+  timm_name: convnext_base
+  input_size: 224   # [ASSUMPTION] not stated in the paper

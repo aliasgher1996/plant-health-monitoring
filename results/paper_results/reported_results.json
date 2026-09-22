@@ -1,0 +1,117 @@
+{
+  "_notice": "Reported results from the paper - not independently reproduced by this repository. Values are transcribed exactly as printed in Fuentes, Asgher et al. (2025), Front. Plant Sci. 16:1511651, doi:10.3389/fpls.2025.1511651.",
+  "table1_data_acquisition": {
+    "source": "Table 1",
+    "rows": [
+      {"line": 1, "variety": "Nonari-Cherry", "cultivation_period": "2022/08 - 2022/12", "weeks": 18, "plants": 50},
+      {"line": 2, "variety": "Amos Coli", "cultivation_period": "2022/01 - 2022/07", "weeks": 25, "plants": 50},
+      {"line": 3, "variety": "Amos Coli", "cultivation_period": "2022/01 - 2022/07", "weeks": 25, "plants": 50},
+      {"line": 4, "variety": "Dafnis-Hybrid", "cultivation_period": "2022/08 - 2022/12", "weeks": 18, "plants": 50}
+    ]
+  },
+  "table3_class_distribution": {
+    "source": "Table 3 (number of images per expert health level)",
+    "rows": [
+      {"line": "Line 1", "Class 1": 18, "Class 2": 27, "Class 3": 756, "Class 4": 1412, "Class 5": 341, "Total": 2554},
+      {"line": "Line 2", "Class 1": 9, "Class 2": 21, "Class 3": 324, "Class 4": 1743, "Class 5": 1509, "Total": 3606},
+      {"line": "Line 3", "Class 1": 30, "Class 2": 450, "Class 3": 933, "Class 4": 1266, "Class 5": 889, "Total": 3568},
+      {"line": "Line 4", "Class 1": 27, "Class 2": 22, "Class 3": 73, "Class 4": 504, "Class 5": 1738, "Total": 2364},
+      {"line": "Total", "Class 1": 84, "Class 2": 520, "Class 3": 2086, "Class 4": 4952, "Class 5": 4477, "Total": 12119}
+    ]
+  },
+  "table4_split_sizes": {
+    "source": "Table 4 (random 80:20 split after removing under-represented classes)",
+    "rows": [
+      {"line": 1, "Training Data": 2007, "Validation Data": 502},
+      {"line": 2, "Training Data": 2860, "Validation Data": 715},
+      {"line": 3, "Training Data": 2838, "Validation Data": 709},
+      {"line": 4, "Training Data": 1852, "Validation Data": 463}
+    ]
+  },
+  "table5_training_parameters": {
+    "source": "Table 5 and Sec. 3.1",
+    "Optimizer": "AdamW",
+    "Learning Rate": "3e-6 (initial), 1e-6 (minimum)",
+    "Weight Decay": "8e-2",
+    "Learning Rate Scheduler": "Warmup + Cosine Annealing",
+    "Loss Function": "Categorical Cross Entropy",
+    "Final Activation": "SoftMax",
+    "Batch Size": 32,
+    "Input Size": "224 x 224 (VGG-16, ResNet-18, ViT); 384 x 384 (Swin Transformer)",
+    "Augmentation": "rotation (+/-20 degrees), horizontal flip, random crop, CutMix, Mixup, smoothing factor 0.1",
+    "Environment": "Python 3.8, PyTorch 1.10.1, CUDA 11.3, NVIDIA GeForce RTX 3090 (24,268 MB)"
+  },
+  "table6_performance_random_split": {
+    "source": "Table 6 (random 80:20 split; precision, recall and F1 on the validation set)",
+    "best_per_line": {"1": "Swin Transformer-B", "2": "Swin Transformer-B", "3": "ConvNeXt-B", "4": "ConvNeXt-B"},
+    "rows": [
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "architecture": "VGG-16", "Training Accuracy": 0.852, "Validation Accuracy": 0.809, "Precision": 0.75, "Recall": 0.74, "F1-Score": 0.75},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "architecture": "ResNet 18", "Training Accuracy": 0.866, "Validation Accuracy": 0.807, "Precision": 0.76, "Recall": 0.71, "F1-Score": 0.73},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "architecture": "Swin Transformer-B", "Training Accuracy": 0.891, "Validation Accuracy": 0.837, "Precision": 0.81, "Recall": 0.76, "F1-Score": 0.78},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "architecture": "VIT-B", "Training Accuracy": 0.845, "Validation Accuracy": 0.794, "Precision": 0.77, "Recall": 0.69, "F1-Score": 0.72},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "architecture": "ConvNeXt-B", "Training Accuracy": 0.887, "Validation Accuracy": 0.813, "Precision": 0.77, "Recall": 0.71, "F1-Score": 0.74},
+
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "architecture": "VGG-16", "Training Accuracy": 0.760, "Validation Accuracy": 0.725, "Precision": 0.67, "Recall": 0.55, "F1-Score": 0.57},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "architecture": "ResNet 18", "Training Accuracy": 0.793, "Validation Accuracy": 0.751, "Precision": 0.72, "Recall": 0.66, "F1-Score": 0.68},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "architecture": "Swin Transformer-B", "Training Accuracy": 0.858, "Validation Accuracy": 0.812, "Precision": 0.80, "Recall": 0.75, "F1-Score": 0.77},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "architecture": "VIT-B", "Training Accuracy": 0.708, "Validation Accuracy": 0.6498, "Precision": 0.68, "Recall": 0.66, "F1-Score": 0.65},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "architecture": "ConvNeXt-B", "Training Accuracy": 0.847, "Validation Accuracy": 0.789, "Precision": 0.77, "Recall": 0.74, "F1-Score": 0.76},
+
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "architecture": "VGG-16", "Training Accuracy": 0.763, "Validation Accuracy": 0.743, "Precision": 0.75, "Recall": 0.75, "F1-Score": 0.75},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "architecture": "ResNet 18", "Training Accuracy": 0.829, "Validation Accuracy": 0.801, "Precision": 0.78, "Recall": 0.77, "F1-Score": 0.77},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "architecture": "Swin Transformer-B", "Training Accuracy": 0.864, "Validation Accuracy": 0.839, "Precision": 0.81, "Recall": 0.81, "F1-Score": 0.81},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "architecture": "VIT-B", "Training Accuracy": 0.736, "Validation Accuracy": 0.680, "Precision": 0.67, "Recall": 0.67, "F1-Score": 0.66},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "architecture": "ConvNeXt-B", "Training Accuracy": 0.872, "Validation Accuracy": 0.846, "Precision": 0.82, "Recall": 0.82, "F1-Score": 0.82},
+
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "architecture": "VGG-16", "Training Accuracy": 0.838, "Validation Accuracy": 0.794, "Precision": 0.77, "Recall": 0.70, "F1-Score": 0.73},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "architecture": "ResNet 18", "Training Accuracy": 0.875, "Validation Accuracy": 0.806, "Precision": 0.86, "Recall": 0.67, "F1-Score": 0.71},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "architecture": "Swin Transformer-B", "Training Accuracy": 0.830, "Validation Accuracy": 0.772, "Precision": 0.79, "Recall": 0.62, "F1-Score": 0.66},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "architecture": "VIT-B", "Training Accuracy": 0.782, "Validation Accuracy": 0.683, "Precision": 0.64, "Recall": 0.68, "F1-Score": 0.66},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "architecture": "ConvNeXt-B", "Training Accuracy": 0.892, "Validation Accuracy": 0.783, "Precision": 0.79, "Recall": 0.70, "F1-Score": 0.74}
+    ]
+  },
+  "table7_classwise_best_models": {
+    "source": "Table 7 (best model per line: Swin Transformer-B for Lines 1-2, ConvNeXt-B for Lines 3-4)",
+    "rows": [
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "model": "Swin Transformer-B", "class": "Class 3", "Precision": 0.90, "Recall": 0.84, "F1-Score": 0.79},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "model": "Swin Transformer-B", "class": "Class 4", "Precision": 0.81, "Recall": 0.88, "F1-Score": 0.86},
+      {"line": 1, "dataset": "Line 1 (Nonari-Cherry)", "model": "Swin Transformer-B", "class": "Class 5", "Precision": 0.70, "Recall": 0.59, "F1-Score": 0.64},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "model": "Swin Transformer-B", "class": "Class 3", "Precision": 0.79, "Recall": 0.62, "F1-Score": 0.69},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "model": "Swin Transformer-B", "class": "Class 4", "Precision": 0.80, "Recall": 0.80, "F1-Score": 0.80},
+      {"line": 2, "dataset": "Line 2 (Amos Coli)", "model": "Swin Transformer-B", "class": "Class 5", "Precision": 0.80, "Recall": 0.84, "F1-Score": 0.82},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "model": "ConvNeXt-B", "class": "Class 2", "Precision": 0.73, "Recall": 0.75, "F1-Score": 0.74},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "model": "ConvNeXt-B", "class": "Class 3", "Precision": 0.82, "Recall": 0.76, "F1-Score": 0.79},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "model": "ConvNeXt-B", "class": "Class 4", "Precision": 0.84, "Recall": 0.89, "F1-Score": 0.86},
+      {"line": 3, "dataset": "Line 3 (Amos Coli)", "model": "ConvNeXt-B", "class": "Class 5", "Precision": 0.90, "Recall": 0.88, "F1-Score": 0.89},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "model": "ConvNeXt-B", "class": "Class 3", "Precision": 0.86, "Recall": 0.55, "F1-Score": 0.67},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "model": "ConvNeXt-B", "class": "Class 4", "Precision": 0.75, "Recall": 0.79, "F1-Score": 0.77},
+      {"line": 4, "dataset": "Line 4 (Dafnis-Hybrid)", "model": "ConvNeXt-B", "class": "Class 5", "Precision": 0.77, "Recall": 0.77, "F1-Score": 0.77}
+    ]
+  },
+  "figure5_confusion_matrices_row_normalized": {
+    "source": "Figure 5 (values as printed in the figure cells; rows = true class, columns = predicted class)",
+    "line1": {"model": "Swin Transformer-B", "classes": ["Class 3", "Class 4", "Class 5"],
+              "matrix": [[0.79, 0.2, 0.0088], [0.042, 0.9, 0.057], [0.019, 0.39, 0.59]]},
+    "line2": {"model": "Swin Transformer-B", "classes": ["Class 3", "Class 4", "Class 5"],
+              "matrix": [[0.62, 0.35, 0.038], [0.025, 0.8, 0.18], [0.0062, 0.15, 0.84]]},
+    "line3": {"model": "ConvNeXt-B", "classes": ["Class 2", "Class 3", "Class 4", "Class 5"],
+              "matrix": [[0.75, 0.21, 0.037, 0.0074], [0.12, 0.76, 0.1, 0.0071], [0.0026, 0.047, 0.89, 0.061], [0.0037, 0.0037, 0.11, 0.88]]},
+    "line4": {"model": "ConvNeXt-B", "classes": ["Class 3", "Class 4", "Class 5"],
+              "matrix": [[0.55, 0.045, 0.41], [0.0066, 0.79, 0.2], [0.0058, 0.22, 0.77]]}
+  },
+  "table8_plant_based_partitioning": {
+    "source": "Table 8 (plant-based 70:20:10 split of plants into train/validation/test)",
+    "rows": [
+      {"line": 1, "architecture": "Swin Transformer-B", "Training Accuracy": 0.903, "Validation Accuracy": 0.804, "Test Accuracy": 0.790},
+      {"line": 2, "architecture": "Swin Transformer-B", "Training Accuracy": 0.836, "Validation Accuracy": 0.797, "Test Accuracy": 0.779},
+      {"line": 3, "architecture": "ConvNeXt-B", "Training Accuracy": 0.871, "Validation Accuracy": 0.827, "Test Accuracy": 0.805},
+      {"line": 4, "architecture": "ConvNeXt-B", "Training Accuracy": 0.845, "Validation Accuracy": 0.774, "Test Accuracy": 0.765}
+    ]
+  },
+  "sec4_2_spatiotemporal_agreement": {
+    "source": "Sec. 4.2",
+    "statement": "The models correctly classified health status in 83% of cases",
+    "agreement": 0.83,
+    "setting": "Health trajectories of plants not included in training, predicted with the trained models and compared with expert labels"
+  }
+}

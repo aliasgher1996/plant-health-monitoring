@@ -1,0 +1,7 @@
+# Table 8: Model performance using plant-based partitioning (70:20:10 of plants)
+# Reported results from the paper - not independently reproduced by this repository.
+Dataset,Architecture,Training Accuracy,Validation Accuracy,Test Accuracy
+Line 1,Swin Transformer-B,0.903,0.804,0.790
+Line 2,Swin Transformer-B,0.836,0.797,0.779
+Line 3,ConvNeXt-B,0.871,0.827,0.805
+Line 4,ConvNeXt-B,0.845,0.774,0.765

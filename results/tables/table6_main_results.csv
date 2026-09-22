@@ -1,0 +1,23 @@
+# Table 6: Performance metrics across datasets (random 80:20 split)
+# Reported results from the paper - not independently reproduced by this repository.
+Dataset,Architecture,Training Accuracy,Validation Accuracy,Precision,Recall,F1-Score
+Line 1 (Nonari-Cherry),VGG-16,0.852,0.809,0.75,0.74,0.75
+Line 1 (Nonari-Cherry),ResNet 18,0.866,0.807,0.76,0.71,0.73
+Line 1 (Nonari-Cherry),Swin Transformer-B,0.891,0.837,0.81,0.76,0.78
+Line 1 (Nonari-Cherry),VIT-B,0.845,0.794,0.77,0.69,0.72
+Line 1 (Nonari-Cherry),ConvNeXt-B,0.887,0.813,0.77,0.71,0.74
+Line 2 (Amos Coli),VGG-16,0.760,0.725,0.67,0.55,0.57
+Line 2 (Amos Coli),ResNet 18,0.793,0.751,0.72,0.66,0.68
+Line 2 (Amos Coli),Swin Transformer-B,0.858,0.812,0.80,0.75,0.77
+Line 2 (Amos Coli),VIT-B,0.708,0.6498,0.68,0.66,0.65
+Line 2 (Amos Coli),ConvNeXt-B,0.847,0.789,0.77,0.74,0.76
+Line 3 (Amos Coli),VGG-16,0.763,0.743,0.75,0.75,0.75
+Line 3 (Amos Coli),ResNet 18,0.829,0.801,0.78,0.77,0.77
+Line 3 (Amos Coli),Swin Transformer-B,0.864,0.839,0.81,0.81,0.81
+Line 3 (Amos Coli),VIT-B,0.736,0.680,0.67,0.67,0.66
+Line 3 (Amos Coli),ConvNeXt-B,0.872,0.846,0.82,0.82,0.82
+Line 4 (Dafnis-Hybrid),VGG-16,0.838,0.794,0.77,0.70,0.73
+Line 4 (Dafnis-Hybrid),ResNet 18,0.875,0.806,0.86,0.67,0.71
+Line 4 (Dafnis-Hybrid),Swin Transformer-B,0.830,0.772,0.79,0.62,0.66
+Line 4 (Dafnis-Hybrid),VIT-B,0.782,0.683,0.64,0.68,0.66
+Line 4 (Dafnis-Hybrid),ConvNeXt-B,0.892,0.783,0.79,0.70,0.74

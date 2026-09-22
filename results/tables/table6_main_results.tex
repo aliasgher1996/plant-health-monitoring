@@ -1,0 +1,31 @@
+% Reported results from the paper - not independently reproduced by this repository.
+\begin{table}[ht]
+\centering
+\caption{Table 6: Performance metrics across datasets (random 80:20 split)}
+\begin{tabular}{llccccc}
+\hline
+Dataset & Architecture & Training Accuracy & Validation Accuracy & Precision & Recall & F1-Score \\
+\hline
+Line 1 (Nonari-Cherry) & VGG-16 & 0.852 & 0.809 & 0.75 & 0.74 & 0.75 \\
+Line 1 (Nonari-Cherry) & ResNet 18 & 0.866 & 0.807 & 0.76 & 0.71 & 0.73 \\
+\textbf{Line 1 (Nonari-Cherry)} & \textbf{Swin Transformer-B} & \textbf{0.891} & \textbf{0.837} & \textbf{0.81} & \textbf{0.76} & \textbf{0.78} \\
+Line 1 (Nonari-Cherry) & VIT-B & 0.845 & 0.794 & 0.77 & 0.69 & 0.72 \\
+Line 1 (Nonari-Cherry) & ConvNeXt-B & 0.887 & 0.813 & 0.77 & 0.71 & 0.74 \\
+Line 2 (Amos Coli) & VGG-16 & 0.760 & 0.725 & 0.67 & 0.55 & 0.57 \\
+Line 2 (Amos Coli) & ResNet 18 & 0.793 & 0.751 & 0.72 & 0.66 & 0.68 \\
+\textbf{Line 2 (Amos Coli)} & \textbf{Swin Transformer-B} & \textbf{0.858} & \textbf{0.812} & \textbf{0.80} & \textbf{0.75} & \textbf{0.77} \\
+Line 2 (Amos Coli) & VIT-B & 0.708 & 0.6498 & 0.68 & 0.66 & 0.65 \\
+Line 2 (Amos Coli) & ConvNeXt-B & 0.847 & 0.789 & 0.77 & 0.74 & 0.76 \\
+Line 3 (Amos Coli) & VGG-16 & 0.763 & 0.743 & 0.75 & 0.75 & 0.75 \\
+Line 3 (Amos Coli) & ResNet 18 & 0.829 & 0.801 & 0.78 & 0.77 & 0.77 \\
+Line 3 (Amos Coli) & Swin Transformer-B & 0.864 & 0.839 & 0.81 & 0.81 & 0.81 \\
+Line 3 (Amos Coli) & VIT-B & 0.736 & 0.680 & 0.67 & 0.67 & 0.66 \\
+\textbf{Line 3 (Amos Coli)} & \textbf{ConvNeXt-B} & \textbf{0.872} & \textbf{0.846} & \textbf{0.82} & \textbf{0.82} & \textbf{0.82} \\
+Line 4 (Dafnis-Hybrid) & VGG-16 & 0.838 & 0.794 & 0.77 & 0.70 & 0.73 \\
+Line 4 (Dafnis-Hybrid) & ResNet 18 & 0.875 & 0.806 & 0.86 & 0.67 & 0.71 \\
+Line 4 (Dafnis-Hybrid) & Swin Transformer-B & 0.830 & 0.772 & 0.79 & 0.62 & 0.66 \\
+Line 4 (Dafnis-Hybrid) & VIT-B & 0.782 & 0.683 & 0.64 & 0.68 & 0.66 \\
+\textbf{Line 4 (Dafnis-Hybrid)} & \textbf{ConvNeXt-B} & \textbf{0.892} & \textbf{0.783} & \textbf{0.79} & \textbf{0.70} & \textbf{0.74} \\
+\hline
+\end{tabular}
+\end{table}

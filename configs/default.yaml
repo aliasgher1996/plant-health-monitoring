@@ -1,0 +1,77 @@
+# =============================================================================
+# Default configuration
+# "Comprehensive plant health monitoring: expert-level assessment with
+#  spatio-temporal image data" (Fuentes, Asgher, et al., Front. Plant Sci. 2025)
+#
+# Every value is tagged:
+#   [PAPER]      stated in the paper (section / table given)
+#   [ASSUMPTION] not stated in the paper; a reasonable default chosen for this
+#                repository. Change it if your original setup differed.
+# =============================================================================
+
+base:
+  annotations: ./data/annotations.csv   # master annotation file (see data/README.md)
+  image_root: ./data/images             # image paths in annotations.csv are relative to this
+  split_dir: ./data/splits              # written by scripts/prepare_splits.py
+  save_path: ./runs                     # checkpoints / logs are written to <save_path>/<experiment_name>
+  device: cuda
+  random_seed: 42                       # [ASSUMPTION] seed for splits and training
+  cudnn_deterministic: false
+  overwrite: false
+  progress: true
+
+data:
+  line: 1                               # [PAPER] one model is trained per cultivation line (Line 1-4, Table 1)
+  split: random                         # random  -> 80:20 image-level split (Sec. 3.1.1, Table 4)
+                                        # plant   -> 70:20:10 plant-level split (Sec. 4.1, Table 8)
+  health_levels: [1, 2, 3, 4, 5]        # [PAPER] five-point expert scale (Table 2)
+  min_samples_per_class: 30             # [PAPER] Sec. 3.1.1: classes with "fewer than 30 samples" are excluded.
+  exclude_at_threshold: true            # [ASSUMPTION] Figure 5C shows Line 3 without Class 1, which has exactly
+                                        # 30 samples (Table 3), so a class with <= 30 samples is dropped here.
+  random_split: {train: 0.8, val: 0.2}  # [PAPER] Sec. 3.1.1
+  plant_split: {train: 0.7, val: 0.2, test: 0.1}  # [PAPER] Sec. 4.1 (fractions of plants, not images)
+  stratify_random_split: true           # [ASSUMPTION] the paper says "randomly split"; stratified by class here
+  input_size: null                      # null -> taken from configs/models.yaml for the chosen model (Sec. 3.1.3)
+  mean: [0.485, 0.456, 0.406]           # [ASSUMPTION] "normalized ... using the mean and standard deviation" (Sec. 3.1.3);
+  std: [0.229, 0.224, 0.225]            # ImageNet statistics used because all backbones are ImageNet pre-trained.
+
+augmentation:                           # [PAPER] Sec. 3.1.3 lists the operations; magnitudes marked below
+  rotation_degrees: 20                  # [PAPER] rotation within +/- 20 degrees
+  horizontal_flip: 0.5                  # [PAPER] operation; [ASSUMPTION] probability 0.5
+  random_crop_scale: [0.8, 1.0]         # [PAPER] operation; [ASSUMPTION] RandomResizedCrop scale
+  mixup_alpha: 0.8                      # [PAPER] Mixup used; [ASSUMPTION] alpha (timm default)
+  cutmix_alpha: 1.0                     # [PAPER] CutMix used; [ASSUMPTION] alpha (timm default)
+  mixup_prob: 1.0                       # [ASSUMPTION]
+  mixup_switch_prob: 0.5                # [ASSUMPTION] probability of choosing CutMix over Mixup per batch
+  label_smoothing: 0.1                  # [PAPER] "with a smoothing factor of 0.1" (Sec. 3.1.3)
+
+model:
+  name: swin_b                          # one of: vgg16, resnet18, vit_b, swin_b, convnext_b (configs/models.yaml)
+  pretrained: true                      # [PAPER] ImageNet pre-trained weights, transfer learning (Sec. 3.1.2)
+  freeze_backbone: false                # [PAPER] "All pre-trained layers remained trainable" (Sec. 3.1.2)
+  checkpoint: null                      # optional path to weights to initialise from
+
+train:
+  epochs: 100                           # [ASSUMPTION] maximum epochs; early stopping ends training earlier
+  batch_size: 32                        # [PAPER] Sec. 3.1.3
+  num_workers: 8
+  pin_memory: true
+  warmup_epochs: 5                      # [PAPER] warm-up phase used; [ASSUMPTION] its length
+  early_stopping_patience: 10           # [PAPER] early stopping used (Sec. 3.2); [ASSUMPTION] patience
+  indicator: f1                         # [PAPER] F1-score is the primary metric (Sec. 3.2) -> used for model selection
+  metrics: [acc, precision, recall, f1] # [PAPER] Eqs. 2-5
+  average: macro                        # [ASSUMPTION] averaging used for Table 6 precision/recall/F1
+  eval_interval: 1
+
+solver:                                 # [PAPER] Table 5
+  optimizer: adamw
+  learning_rate: 3.0e-6                 # initial / peak learning rate
+  min_learning_rate: 1.0e-6             # minimum learning rate reached by cosine decay
+  weight_decay: 8.0e-2
+  betas: [0.9, 0.999]                   # [ASSUMPTION] AdamW defaults
+  lr_scheduler: warmup_cosine           # warm-up + cosine annealing (custom scheduler, Sec. 3.1.2)
+  warmup_start_factor: 0.01             # [ASSUMPTION] warm-up starts at learning_rate * factor
+
+inference:
+  view_aggregation: mean_prob           # [ASSUMPTION] how per-view predictions are combined into S_t (Eq. 1):
+                                        # mean_prob | max_prob | majority_vote
