@@ -21,10 +21,13 @@ Plant monitoring by manual inspection is slow and labour-intensive, and it often
 - **Generalisation:** with a plant-based split (test plants never seen in training), test accuracy is 0.765–0.805. Health trajectories of unseen plants agree with the expert in 83% of cases.
 
 ```
- weekly multi-view images of plant P at time t        shared feature extractor         plant state head
- {I_t^left, I_t^right, I_t^top}  ──►  F_t^i  ──►  φ(F_t^i)  (CNN / Transformer)  ──►  S_t = f( ⊕_i φ(F_t^i) ) ∈ {1..5}
-                                                                                           │
-                                            S_t for t = 1..T  ──►  spatio-temporal health map of every plant
+```mermaid
+flowchart LR
+    A["Plant P at week t<br/>left · right · top images"] --> B["Shared feature extractor<br/>CNN / Transformer"]
+    B --> C["Per-image features<br/>φ(F<sub>t</sub><sup>i</sup>)"]
+    C --> D["Plant state head<br/>S<sub>t</sub> ∈ {1,…,5}"]
+    D --> E["Weekly states S<sub>1</sub> … S<sub>T</sub><br/>→ spatio-temporal health map"]
+```
 ```
 
 ## Repository structure
