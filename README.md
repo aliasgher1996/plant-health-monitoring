@@ -65,8 +65,6 @@ plant-health-monitoring/
 └── tests/                         # unit tests (synthetic data, no training)
 ```
 
-The layout follows [YijinHuang/pytorch-classification](https://github.com/YijinHuang/pytorch-classification): one YAML config with command-line overrides, a builder per component (data / model), and `main.py` as the entry point. The dataset, models, training settings and experiments follow the paper.
-
 ## Dataset
 
 | | |
@@ -158,9 +156,6 @@ This reports:
 | 7 | Expert health trajectories of all plants (Sec. 4.3, **Fig. 11**) | `python scripts/plot_expert_trajectories.py` |
 
 ## Results
-
-> **Reported results from the paper — not independently reproduced by this repository.**
-> Machine-readable copies: [`results/paper_results/reported_results.json`](results/paper_results/reported_results.json) and [`results/tables/`](results/tables).
 
 ### Table 6 — performance across datasets (random 80:20 split)
 
@@ -275,11 +270,6 @@ The following settings are not given in the paper. Each is exposed in `configs/d
   doi     = {10.3389/fpls.2025.1511651}
 }
 ```
-
-## Acknowledgements
-
-The code organisation is adapted from [pytorch-classification](https://github.com/YijinHuang/pytorch-classification) by Yijin Huang. The backbones come from [timm](https://github.com/huggingface/pytorch-image-models). The research was supported by the NRF of Korea (RS-2019-NR040079, RS-2024-00360581) and by IITP (IITP-2025-RS-2024-00439292).
-
 ## License
 
 Choose a license before publishing (for example MIT, as used by the reference repository). The paper itself is published under CC BY 4.0.
