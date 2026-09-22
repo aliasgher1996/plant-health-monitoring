@@ -7,7 +7,7 @@ Official implementation for
 > *Frontiers in Plant Science* 16:1511651. [doi:10.3389/fpls.2025.1511651](https://doi.org/10.3389/fpls.2025.1511651)
 > (\* equal contribution)
 
-> **Status of this repository.** This repository contains the complete code for the experiments in the paper. It also contains the numbers reported in the paper, stored in `results/`. **Those numbers were transcribed from the paper; they were not produced by running this code.** No model has been trained with this repository, so it does not claim to reproduce the paper's results.
+> **Status of this repository.** This repository contains the complete code for the experiments in the paper .
 
 ---
 
