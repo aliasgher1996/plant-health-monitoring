@@ -7,7 +7,7 @@ Official implementation for
 > *Frontiers in Plant Science* 16:1511651. [doi:10.3389/fpls.2025.1511651](https://doi.org/10.3389/fpls.2025.1511651)
 > (\* equal contribution)
 
-> **Status of this repository.** This repository contains the complete code for the experiments in the paper .
+> **Status of this repository.** This repository contains the complete code for the experiments in the paper.
 
 ---
 
@@ -20,14 +20,12 @@ Plant monitoring by manual inspection is slow and labour-intensive, and it often
 - **Best models:** Swin Transformer-B (Lines 1–2) and ConvNeXt-B (Lines 3–4). The best validation F1-score ranges from 0.74 to 0.82.
 - **Generalisation:** with a plant-based split (test plants never seen in training), test accuracy is 0.765–0.805. Health trajectories of unseen plants agree with the expert in 83% of cases.
 
-```
 ```mermaid
 flowchart LR
-    A["Plant P at week t<br/>left · right · top images"] --> B["Shared feature extractor<br/>CNN / Transformer"]
-    B --> C["Per-image features<br/>φ(F<sub>t</sub><sup>i</sup>)"]
-    C --> D["Plant state head<br/>S<sub>t</sub> ∈ {1,…,5}"]
-    D --> E["Weekly states S<sub>1</sub> … S<sub>T</sub><br/>→ spatio-temporal health map"]
-```
+    A["Plant P at week t<br/>left, right, top images"] --> B["Shared feature extractor<br/>CNN or Transformer"]
+    B --> C["Per-image features"]
+    C --> D["Plant state head<br/>health state 1-5"]
+    D --> E["Weekly states over the season<br/>spatio-temporal health map"]
 ```
 
 ## Repository structure
@@ -67,6 +65,7 @@ plant-health-monitoring/
 └── tests/                         # unit tests (synthetic data, no training)
 ```
 
+The layout follows [YijinHuang/pytorch-classification](https://github.com/YijinHuang/pytorch-classification): one YAML config with command-line overrides, a builder per component (data / model), and `main.py` as the entry point. The dataset, models, training settings and experiments follow the paper.
 
 ## Dataset
 
@@ -83,7 +82,7 @@ Place the images under `data/images/` and create `data/annotations.csv` with the
 ## Installation
 
 ```bash
-git clone https://github.com/<your-account>/plant-health-monitoring.git
+git clone https://github.com/aliasgher1996/plant-health-monitoring.git
 cd plant-health-monitoring
 conda create -n planthealth python=3.8 -y
 conda activate planthealth
@@ -159,6 +158,10 @@ This reports:
 | 7 | Expert health trajectories of all plants (Sec. 4.3, **Fig. 11**) | `python scripts/plot_expert_trajectories.py` |
 
 ## Results
+
+> **Reported results from the paper — not independently reproduced by this repository.**
+> Machine-readable copies: [`results/paper_results/reported_results.json`](results/paper_results/reported_results.json) and [`results/tables/`](results/tables).
+
 ### Table 6 — performance across datasets (random 80:20 split)
 
 | Dataset | Architecture | Train Acc. | Val. Acc. | Precision | Recall | F1 |
@@ -272,6 +275,10 @@ The following settings are not given in the paper. Each is exposed in `configs/d
   doi     = {10.3389/fpls.2025.1511651}
 }
 ```
+
+## Acknowledgements
+
+The code organisation is adapted from [pytorch-classification](https://github.com/YijinHuang/pytorch-classification) by Yijin Huang. The backbones come from [timm](https://github.com/huggingface/pytorch-image-models). The research was supported by the NRF of Korea (RS-2019-NR040079, RS-2024-00360581) and by IITP (IITP-2025-RS-2024-00439292).
 
 ## License
 
